@@ -1,6 +1,6 @@
 ---
 layout: default
-title:  Team
+title:  Sirius-3
 ---
 
 # {{ page.title }}
@@ -9,8 +9,8 @@ title:  Team
 ## USER 1
 ***UCI Net ID***: ucinetid1
 
-## USER 2
-***UCI Net ID***: ucinetid2
+## Yingyi Xu
+***UCI Net ID***: yingyx2
 
 ## USER 3
 ***UCI Net ID***: ucinetid3
