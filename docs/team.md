@@ -6,8 +6,8 @@ title:  Sirius-3
 # {{ page.title }}
 
 
-## USER 1
-***UCI Net ID***: ucinetid1
+## Jason Huang
+***UCI Net ID***: jiacheh4
 
 ## Yingyi Xu
 ***UCI Net ID***: yingyx2
