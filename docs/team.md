@@ -12,5 +12,5 @@ title:  Sirius-3
 ## Yingyi Xu
 ***UCI Net ID***: yingyx2
 
-## USER 3
-***UCI Net ID***: ucinetid3
+## Chong Liu
+***UCI Net ID***: chongl9
