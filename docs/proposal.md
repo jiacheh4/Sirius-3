@@ -11,7 +11,11 @@ The goal of the project is to let the agent protects as many villagers as possib
 
 Input information: The map, where the agent and zombies can walk around. The objects on the map and their positions, such as agent, villagers and zombies. The algorithm will guide the agent to perform desired tasks, for example attacking, moving, etc. 
 
-Output information: Time survived so far, zombies killed so far, and score received so far. Three possible outcome: 1. Agent was killed by zombies 2. All villagers were killed by zombies 3. Both agent and villagers survived in limited time frame (ex. 2 mins)
+Output information: Time survived so far, zombies killed so far, and score received so far. 
+  Three possible outcome: 
+    1. Agent was killed by zombies 
+    2. All villagers were killed by zombies 
+    3. Both agent and villagers survived in limited time frame (ex. 2 mins)
 
 ## AI/ML Algorithms 
 
