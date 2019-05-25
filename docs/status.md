@@ -19,7 +19,7 @@ _Algorithm:_
 To be specific, we use DQN(Deep Q-Network) as our main algorithm. 
 The key point of this algorithm is to fit the original q-value function by using a neural network, which is:
 
-                                                 Q(s,a,w)~q(s,a)
+> Q(s,a,w)~q(s,a)
 
 where Q is the neural network, w is the weight.
 We actually design two ways of representing the relationship between state,action and q-values, which will make easier for us to calculate. They are:
