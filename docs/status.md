@@ -13,6 +13,7 @@ learn from the algorithm and start to choose the best action or move it should d
 
 Following is the whole process diagram of our algorithm:
 
+![picture1](https://github.com/jiacheh4/Sirius-3/blob/master/docs/unnamed.jpg)
 
 _Algorithm:_
 
@@ -51,6 +52,9 @@ The real memory array would be in the form of:
 We will record every frame, its corresponding action, reward and if this frame is a terminal frame. 
 
 Every time we need to take out the data, we randomly choose one frame. The chosen frame we call it “key frame”. The key frame will form a state (frame k-3 to frame k) and new_state(k-2 to k+1). The action will just be the action from the key frame k.
+
+![picture2](https://github.com/jiacheh4/Sirius-3/blob/master/docs/Untitled%20Diagram.jpg)
+
 So every piece of data took out from the memory array would be in the form of: 
 
 > [state ,action, reward, new_state, is_terminal]
