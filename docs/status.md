@@ -29,11 +29,12 @@ The first one is the actions and corresponding q-values under given state, and t
 
 In the original Q-Network algorithm, we use Bellman equation to iteratively updating the q-function:
 
-                  q<sub>new</sub>(s,a)= E<sub>s’</sub>[reward+γ*max q(s',a')| S<sub>t</sub>=s, A<sub>t</sub>=a]
+> q<sub>new</sub>(s,a)= E<sub>s’</sub>[reward+γ\*max q(s',a')| S<sub>t</sub>=s, A<sub>t</sub>=a]
                   
 But apparently, if we already know what q(s,a) is, there is no need for us to use neural network to fit it. Plus, as a traditional machine learning algorithm, the neural network need a loss function to update the weight. Then how do we accomplish these two missions?  We use following:
-                                   
-                                   Loss = (reward+γ*max Q(s',a',w)-Q(s,a,w))<sup>2</sup>
+
+> Loss = (reward+γ\*max Q(s',a',w)-Q(s,a,w))<sup>2</sup>
+
 Also, if we update w every frame, the value would become very unstable. Because while Q is having a new w, Q’ is also having a new value, which the model would not be able to aim for a correct target. So we update the w every 10000 frame.
 
 _Input:_
@@ -45,13 +46,15 @@ In the traditional machine learning process, we shuffle the data to solve the pr
 We use a experience/memory array to record all the state. We use this array to store the past state, and randomly take out some samples and feed them to the neural network to do the training.  
 The real memory array would be in the form of:
 
-                                    [frame, action, reward, is_terminal]
+> [frame, action, reward, is_terminal]
+
 We will record every frame, its corresponding action, reward and if this frame is a terminal frame. 
 
 Every time we need to take out the data, we randomly choose one frame. The chosen frame we call it “key frame”. The key frame will form a state (frame k-3 to frame k) and new_state(k-2 to k+1). The action will just be the action from the key frame k.
 So every piece of data took out from the memory array would be in the form of: 
 
-                                   [state ,action, reward, new_state, is_terminal]
+> [state ,action, reward, new_state, is_terminal]
+
 We feed the neural network with a batch of above kind of data.
 
 We also consider the storage. Our memory array have a limitation. If it’s full, the new state will replace the old ones. The reason why we doing this is the training could take a long time, and the storage of the RAM could be full. We don’t want the training stops because there is no memory on the hardware.
@@ -82,5 +85,6 @@ _Challenges:_
 
 
 ## Resource used: 
-
-
+1. [Fighting Zombies in Minecraft With Deep Reinforcement Learning](http://cs229.stanford.edu/proj2016/report/UdagawaLeeNarasimhan-FightingZombiesInMinecraftWithDeepReinforcementLearning-report.pdf) - Hiroto Udagawa, Tarun Narasimhan, Shim-Young Lee
+2. [Beat Atari with Deep Reinforcement Learning!](https://becominghuman.ai/lets-build-an-atari-ai-part-1-dqn-df57e8ff3b26) - Adrien Lucas Ecoffet
+3. [Playing Atari with Deep Reinforcement Learning](https://www.cs.toronto.edu/~vmnih/docs/dqn.pdf) - Volodymyr Mnih, Koray Kavukcuoglu, David Silver, Alex Graves, Ioannis Antonoglou, Daan Wierstra Martin Riedmiller
