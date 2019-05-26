@@ -13,11 +13,18 @@ In this project, our goal is to let agent protect villagers and kill zombies. We
 [Click Me](https://youtu.be/r0cGpFkzpt0)
 
 
+## Code
 [Source code](https://github.com/jiacheh4/Sirius-3)
 
-Reports:
+
+## Reports
 
 - [Proposal](https://jiacheh4.github.io/Sirius-3/proposal.html)
 - [Status](https://jiacheh4.github.io/Sirius-3/status.html)
 - [Final](https://jiacheh4.github.io/Sirius-3/final.html)
 
+## Useful Resources
+
+[Fighting Zombies in Minecraft With Deep Reinforcement Learning](http://cs229.stanford.edu/proj2016/report/UdagawaLeeNarasimhan-FightingZombiesInMinecraftWithDeepReinforcementLearning-report.pdf) - Hiroto Udagawa, Tarun Narasimhan, Shim-Young Lee
+
+[Find path using Q-learning](https://www.youtube.com/watch?v=9XRL6d-yxp4)
