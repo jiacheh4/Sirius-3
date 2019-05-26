@@ -79,7 +79,6 @@ The algorithm we use to choose action is the Greedy Epsilon Policy. We would set
 
 <img src="image/fig1.png" alt="image/fig1.png" style="width:50%;height:50%">
 Fig1. Initialize the arena prototype with the coordinates
-
 By setting up our initial map with a 5 x 5 (or 25 blocks) size arena, we are able to train the agent’s ability to observe its surrounding, make an action according to the constraints/score, and learn the reward/consequence of attacking a certain entity. 
 In order to ensure accurate observation, it is necessary to include coordinates that locates each entity (Agent, Villager, Zombie) and differentiates their standing positions (25 blocks).
 The accuracy is the number of “correct” actions that generates positive reward each mission over the total number of observations. Since our project mainly focus on the reward policy. The performance of this project is measured by how accurately our agent observes its surrounding environment. After we finish training our agent for certain number of rounds, we are able to see that our agent can identify and attack the zombie. 
@@ -87,11 +86,17 @@ The accuracy is the number of “correct” actions that generates positive rewa
 There are some examples regarding our accuracy measurement.
 
 <img src="image/fig2.png" alt="image/fig2.png" style="width:50%;height:50%">
+Fig2. The agent attacked the villager 
+In the picture above, the agent performed an action we don’t want. We count this as a false positive because the agent is able to learn that attacking villager will result in a negative reward. There are also cases when villagers and zombies stayed very close. By which I mean agent may accidentally attack the villager while his first intention was the zombie. 
 
 <img src="image/fig3.png" alt="image/fig3.png" style="width:50%;height:50%">
+Fig3. The villager was attacked by zombie
 <img src="image/fig4.png" alt="image/fig4.png" style="width:50%;height:50%">
+Fig4. Agent draws the attention of zombie
 <img src="image/fig5.png" alt="image/fig5.png" style="width:50%;height:50%">
+Fig5. Agent’s behavior before training
 <img src="image/fig6.png" alt="image/fig6.png" style="width:50%;height:50%">
+Fig6. Agent’s behavior after training
 
 ## Remaining goals and challenges: 
 
