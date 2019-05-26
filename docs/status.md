@@ -9,12 +9,14 @@ In this project, our goal is to let agent protect villagers and kill zombies. We
 which is a combination of deep learning and reinforcement learning. By randomly choosing actions at the beginning, agent will 
 learn from the algorithm and start to choose the best action or move it should do to accomplish our goal. 
 
+
 ## Approach: 
 
 Following is the whole process diagram of our algorithm:
 
 ![picture1](https://docs.google.com/uc?id=1bn3oM9O2TEnE1iywUMD3XLSZOir2bjCk)
 <h6>Fig1. Diagram of the algorithm</h6>
+
 
 #### _Algorithm:_
 
@@ -39,10 +41,12 @@ But apparently, if we already know what q(s,a) is, there is no need for us to us
 
 Also, if we update w every frame, the value would become very unstable. Because while Q is having a new w, Q’ is also having a new value, which the model would not be able to aim for a correct target. So we update the w every 10000 frame.
 
+
 #### _Input:_
 
 Our input state would be a 5x5 map from every frame, including the position of the agent, zombie and villager. And some direction information of the agent. Different position of either agent, villager and zombie would be a unique position state. The total position states in 5x5 map would be 25x24x23 = 13800. While the agent have degree as direction information, the actual state would be hard to calculate. And that’s why we choose neural network to process. 
 To have more details, we actually take 4 frames as a complete state. Aka, a complete state would be a 4x5x5 array. Because the difference between every frame is too small, especially the position information, any of the unit on the map may be in the same brick for 3~5 frames.
+
 
 #### _Dealing with Data:_
 
@@ -67,14 +71,17 @@ We feed the neural network with a batch of above kind of data.
 
 We also consider the storage. Our memory array have a limitation. If it’s full, the new state will replace the old ones. The reason why we doing this is the training could take a long time, and the storage of the RAM could be full. We don’t want the training stops because there is no memory on the hardware.
 
+
 #### _Reward:_
 
 We set 6 different situations for rewarding in total. If villager alive in every frame, we give reward 0.02. If villager died, the agent will have reward -50. If zombie died, it scores 40. If the zombie is attacked by the agent, everytime it scores 10. If agent is attacked by zombie, it scores -5. Finally if our agent died, it scores -40. 
+
 
 #### _Action and Policy:_
 
 We only have 5 action, which are move forward, move backward, turn left, turn right and doing nothing. We let the agent keep attacking so that it only need to consider about which way to go.
 The algorithm we use to choose action is the Greedy Epsilon Policy. We would set the value of epsilon to be 0.05. Then we will randomly generate a number between 0-1, if the number is greater and equal than 0.05, our agent will pick the most valuable action from the q-value list. Otherwise, agent will randomly pick an action to execute. 
+
 
 
 ## Evaluation:
@@ -116,6 +123,7 @@ Table. 5 x 5 [one zombie/one villager] map
 2. We may want to update DQN to Dueling Network. We will separate the state and action. In this way we will have two different value to get a q-network, one will evaluate the value of each state, and the another one will only evaluate the value of each action. Currently, we consider both states and actions together in one  q-network which may have the chance that ignore some points. 
 3. When we pick the data from our memory array, we want those data that has more loss than other data to have a higher priority to be picken from the array. Just randomly choose the data from the array cannot tell which data has more value. 
 
+
 #### _Challenges:_
 
 1. The challenges we encountered is the size of map. So far we can only train our agent on 5x5 grid. Once the grid becomes larger like 10x10 grid, it would take around 10 hours to train. Since the total states will increase with increase of the map. We plan to increase the size of grid little by little, and borrow a computer with a high performance GPU.  Or maybe we can do screenshot as input state instead of giving map to the agent since the screenshot has more information, and using CNN would be a perfect match for it.
@@ -123,9 +131,11 @@ Table. 5 x 5 [one zombie/one villager] map
 3. The setup of the game was also painful for us. There are lots of unexpected elements we had not considered before, like the angle agent turns. In some angle, agent cannot hit the zombie but zombie can hit agent. Because we have limited information for the agent, it’s hard for it to make adjustion on such kind of situation.
 
 
+
 ## Video Summary:
 
 [Youtube Link](https://youtu.be/r0cGpFkzpt0)
+
 
 
 ## Resource used: 
