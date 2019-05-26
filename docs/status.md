@@ -13,7 +13,7 @@ learn from the algorithm and start to choose the best action or move it should d
 
 Following is the whole process diagram of our algorithm:
 
-![picture1](https://docs.google.com/uc?id=1jHovv18Uy49HXBCrBg8jYlxChstYMt-F)
+![picture1](https://docs.google.com/uc?id=1bn3oM9O2TEnE1iywUMD3XLSZOir2bjCk)
 
 #### _Algorithm:_
 
@@ -55,7 +55,7 @@ We will record every frame, its corresponding action, reward and if this frame i
 
 Every time we need to take out the data, we randomly choose one frame. The chosen frame we call it “key frame”. The key frame will form a state (frame k-3 to frame k) and new_state(k-2 to k+1). The action will just be the action from the key frame k.
 
-<img src="Diagram.jpg" style="width:50%;height:50%">
+![picture2](https://docs.google.com/uc?id=1jHovv18Uy49HXBCrBg8jYlxChstYMt-F)
 
 So every piece of data took out from the memory array would be in the form of: 
 
