@@ -123,6 +123,11 @@ Table. 5 x 5 [one zombie/one villager] map
 3. The setup of the game was also painful for us. There are lots of unexpected elements we had not considered before, like the angle agent turns. In some angle, agent cannot hit the zombie but zombie can hit agent. Because we have limited information for the agent, it’s hard for it to make adjustion on such kind of situation.
 
 
+## Video Summary:
+
+[Youtube Link](https://youtu.be/r0cGpFkzpt0)
+
+
 ## Resource used: 
 
 1. [Fighting Zombies in Minecraft With Deep Reinforcement Learning](http://cs229.stanford.edu/proj2016/report/UdagawaLeeNarasimhan-FightingZombiesInMinecraftWithDeepReinforcementLearning-report.pdf) - Hiroto Udagawa, Tarun Narasimhan, Shim-Young Lee
