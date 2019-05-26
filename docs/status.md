@@ -3,8 +3,6 @@ layout:  default
 title:    Status
 ---
 
-[![Sirius-3 Youtube Summary](https://img.youtube.com/vi/r0cGpFkzpt0/0.jpg)](https://youtu.be/r0cGpFkzpt0)
-
 ## Project summary:
 
 In this project, our goal is to let agent protect villagers and kill zombies. We do this by using deep reinforcement learning,
@@ -15,7 +13,8 @@ learn from the algorithm and start to choose the best action or move it should d
 
 Following is the whole process diagram of our algorithm:
 
-<img src="image/algorithm.jpg" alt="image/algorithm.jpg" style="width:50%;height:50%">
+![picture1](https://docs.google.com/uc?id=1bn3oM9O2TEnE1iywUMD3XLSZOir2bjCk)
+<h6>Fig1. Diagram of the algorithm</h6>
 
 #### _Algorithm:_
 
@@ -57,7 +56,8 @@ We will record every frame, its corresponding action, reward and if this frame i
 
 Every time we need to take out the data, we randomly choose one frame. The chosen frame we call it “key frame”. The key frame will form a state (frame k-3 to frame k) and new_state(k-2 to k+1). The action will just be the action from the key frame k.
 
-<img src="image/Diagram.jpg" alt="image/Diagram.jpg" style="width:50%;height:50%">
+![picture2](https://docs.google.com/uc?id=1jHovv18Uy49HXBCrBg8jYlxChstYMt-F)
+<h6>Fig2. How we choose frame </h6>
 
 So every piece of data took out from the memory array would be in the form of: 
 
@@ -79,28 +79,32 @@ The algorithm we use to choose action is the Greedy Epsilon Policy. We would set
 
 ## Evaluation:
 
-<img src="image/fig1.png" alt="image/fig1.png" style="width:50%;height:50%">
-Fig1. Initialize the arena prototype with the coordinates
+![picture3](https://docs.google.com/uc?id=1mYsPVZb4dQuSfB0UD-cipewkOPFSN3Pt)
+<h6>Fig3. Initialize the arena prototype with the coordinates</h6>
+
 By setting up our initial map with a 5 x 5 (or 25 blocks) size arena, we are able to train the agent’s ability to observe its surrounding, make an action according to the constraints/score, and learn the reward/consequence of attacking a certain entity. 
 In order to ensure accurate observation, it is necessary to include coordinates that locates each entity (Agent, Villager, Zombie) and differentiates their standing positions (25 blocks).
 The accuracy is the number of “correct” actions that generates positive reward each mission over the total number of observations. Since our project mainly focus on the reward policy. The performance of this project is measured by how accurately our agent observes its surrounding environment. After we finish training our agent for certain number of rounds, we are able to see that our agent can identify and attack the zombie. 
 
 There are some examples regarding our accuracy measurement.
 
-<img src="image/fig2.png" alt="image/fig2.png" style="width:50%;height:50%">
-Fig2. The agent attacked the villager 
+![picture4](https://docs.google.com/uc?id=1UC2DO-RqI3zcbA5DZ4EVY6W7o1gF1PD0)
+<h6>Fig4. The agent was attacked the villager</h6>
+
 In the picture above, the agent performed an action we don’t want. We count this as a false positive because the agent is able to learn that attacking villager will result in a negative reward. There are also cases when villagers and zombies stayed very close. By which I mean agent may accidentally attack the villager while his first intention was the zombie. 
 
-<img src="image/fig3.png" alt="image/fig3.png" style="width:50%;height:50%">
-Fig3. The villager was attacked by zombie
-<img src="image/fig4.png" alt="image/fig4.png" style="width:50%;height:50%">
-Fig4. Agent draws the attention of zombie
-<img src="image/fig5.png" alt="image/fig5.png" style="width:50%;height:50%">
-Fig5. Agent’s behavior before training
-<img src="image/fig6.png" alt="image/fig6.png" style="width:50%;height:50%">
-Fig6. Agent’s behavior after training
+<img src="https://docs.google.com/uc?id=1UC2DO-RqI3zcbA5DZ4EVY6W7o1gF1PD0" width="360" hegiht="258" align=center />  <img src="https://docs.google.com/uc?id=1NViFpFv-skRze1dKprkkuIkNF8bnQXz2" width="360" hegiht="258" align=center />
+<h6>Fig3. The villager was attacked by zombie  and  Fig4. Agent draws the attention of zombie</h6>
 
-<img src="image/table.png" alt="image/table.png" style="width:50%;height:50%">
+![picture5](https://docs.google.com/uc?id=1yGu18FSok80-u-iuhSSKKoe8XwwJG0Fw)
+<h6>Fig5. Agent’s behavior before training</h6>
+
+![picture6](https://docs.google.com/uc?id=1FQ0Ruob6qZvQAIvfprSHGRjEfYxHaoVG)
+<h6>Fig6. Agent’s behavior after training</h6>
+
+Table. 5 x 5 [one zombie/one villager] map 
+![picture6](https://docs.google.com/uc?id=1bohSrC52tHW7KkPiLDtU047vKwfeT83C)
+
 
 ## Remaining goals and challenges: 
 
