@@ -98,6 +98,8 @@ Fig5. Agent’s behavior before training
 <img src="image/fig6.png" alt="image/fig6.png" style="width:50%;height:50%">
 Fig6. Agent’s behavior after training
 
+<img src="image/table_p1.png" alt="image/table_p1.png" style="width:50%;height:50%">
+<img src="image/table_p2.png" alt="image/table_p2.png" style="width:50%;height:50%">
 ## Remaining goals and challenges: 
 
 #### _Goals:_
