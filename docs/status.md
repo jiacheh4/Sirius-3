@@ -13,7 +13,7 @@ learn from the algorithm and start to choose the best action or move it should d
 
 Following is the whole process diagram of our algorithm:
 
-![picture1](https://github.com/jiacheh4/Sirius-3/blob/master/docs/unnamed.jpg)
+![picture1](https://docs.google.com/uc?id=memoryD.jpg)
 
 #### _Algorithm:_
 
