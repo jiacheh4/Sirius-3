@@ -7,7 +7,7 @@ title:  Home
 
 Reports:
 
-- [Proposal](proposal.html)
-- [Status](status.html)
-- [Final](final.html)
+- [Proposal](https://jiacheh4.github.io/Sirius-3/proposal.html)
+- [Status](https://jiacheh4.github.io/Sirius-3/status.html)
+- [Final](https://jiacheh4.github.io/Sirius-3/final.html)
 
