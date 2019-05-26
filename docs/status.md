@@ -77,12 +77,12 @@ The algorithm we use to choose action is the Greedy Epsilon Policy. We would set
 
 ## Evaluation:
 
-<img src="fig1.png" alt="fig1.png" style="width:50%;height:50%">
-<img src="fig2.png" alt="fig2.png" style="width:50%;height:50%">
-<img src="fig3.png" alt="fig3.png" style="width:50%;height:50%">
-<img src="fig4.png" alt="fig4.png" style="width:50%;height:50%">
-<img src="fig5.png" alt="fig5.png" style="width:50%;height:50%">
-<img src="fig6.png" alt="fig6.png" style="width:50%;height:50%">
+<img src="image/fig1.png" alt="image/fig1.png" style="width:50%;height:50%">
+<img src="image/fig2.png" alt="image/fig2.png" style="width:50%;height:50%">
+<img src="image/fig3.png" alt="image/fig3.png" style="width:50%;height:50%">
+<img src="image/fig4.png" alt="image/fig4.png" style="width:50%;height:50%">
+<img src="image/fig5.png" alt="image/fig5.png" style="width:50%;height:50%">
+<img src="image/fig6.png" alt="image/fig6.png" style="width:50%;height:50%">
 
 ## Remaining goals and challenges: 
 
