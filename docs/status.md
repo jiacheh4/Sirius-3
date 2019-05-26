@@ -77,6 +77,7 @@ The algorithm we use to choose action is the Greedy Epsilon Policy. We would set
 
 ## Evaluation:
 
+<img src="fig1.jpg" alt="fig1.jpg" style="width:50%;height:50%">
 
 
 ## Remaining goals and challenges: 
