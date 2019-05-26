@@ -1,6 +1,6 @@
 ---
 layout:  default
-title:    Status Report
+title:    Status
 ---
 
 ## Project summary:
@@ -13,7 +13,7 @@ learn from the algorithm and start to choose the best action or move it should d
 
 Following is the whole process diagram of our algorithm:
 
-![picture1](https://docs.google.com/uc?id=memoryD.jpg)
+![picture1](https://docs.google.com/uc?id=1jHovv18Uy49HXBCrBg8jYlxChstYMt-F)
 
 #### _Algorithm:_
 
