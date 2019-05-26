@@ -2,7 +2,7 @@
 layout: default
 title:  Home
 ---
-![picture1](https://docs.google.com/uc?id=1d7DT93OyWw2-oCcTdzsnSYmaYTwqM1On)
+![picture1](https://docs.google.com/uc?id=1SfcoStXqA8y1dTDVNwJI9a_VPmtgTg_y)
 
 ## Summary
 
