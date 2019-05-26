@@ -55,7 +55,7 @@ We will record every frame, its corresponding action, reward and if this frame i
 
 Every time we need to take out the data, we randomly choose one frame. The chosen frame we call it “key frame”. The key frame will form a state (frame k-3 to frame k) and new_state(k-2 to k+1). The action will just be the action from the key frame k.
 
-<img src="Untitled%20Diagram.jpg" alt="(28) Overcount Image" style="width:50%;height:50%">
+<img src="Diagram.jpg" style="width:50%;height:50%">
 
 So every piece of data took out from the memory array would be in the form of: 
 
