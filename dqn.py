@@ -72,15 +72,11 @@ class Agent:
         
         q_values=self.target_q_values_func([new_states])[0]
         max_q_values = np.max(q_values, axis=1)
-        #把是terminal的q_value置为0
         max_q_values[is_terminals] = 0
-        # gamma衰减因子  设置 0.99
         targets = rewards + 0.99* max_q_values
         targets = np.expand_dims(targets, axis=1)
-        #在一个batch的数据上进行一次参数更新
-        #因为我们是以一个batch,aka 32个经验数组去update的
         self.q_network_model.train_on_batch([states, actions], targets)
-        
+        #update weight every 10000 frame
         if self.num_step%10000==0:
             self.update_times+=1
             self.update_target_network()
@@ -110,7 +106,7 @@ class Agent:
                 
                 self.memoryD.append(frame,action,reward,is_terminal)
                 
-                # 设定跑了400帧之后再开始train
+                # start run after 400 frame
                 if self.num_step>400:
                     self.update()
                 
