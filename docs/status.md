@@ -1,6 +1,6 @@
 ---
 layout:  default
-title:    Status
+title:    Status Report
 ---
 
 ## Project summary:
