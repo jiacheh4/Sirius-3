@@ -93,17 +93,19 @@ There are some examples regarding our accuracy measurement.
 
 In the picture above, the agent performed an action we don’t want. We count this as a false positive because the agent is able to learn that attacking villager will result in a negative reward. There are also cases when villagers and zombies stayed very close. By which I mean agent may accidentally attack the villager while his first intention was the zombie. 
 
-<img src="https://docs.google.com/uc?id=1UC2DO-RqI3zcbA5DZ4EVY6W7o1gF1PD0" width="360" hegiht="258" align=center />  <img src="https://docs.google.com/uc?id=1NViFpFv-skRze1dKprkkuIkNF8bnQXz2" width="360" hegiht="258" align=center />
-<h6>Fig3. The villager was attacked by zombie  and  Fig4. Agent draws the attention of zombie</h6>
+![picture5](https://docs.google.com/uc?id=1UC2DO-RqI3zcbA5DZ4EVY6W7o1gF1PD0)
+<h6>Fig5. The villager was attacked by zombie</h6>
+![picture6](https://docs.google.com/uc?id=1NViFpFv-skRze1dKprkkuIkNF8bnQXz2)
+<h6>Fig6. Agent draws the attention of zombie</h6>
 
-![picture5](https://docs.google.com/uc?id=1yGu18FSok80-u-iuhSSKKoe8XwwJG0Fw)
-<h6>Fig5. Agent’s behavior before training</h6>
+![picture7](https://docs.google.com/uc?id=1yGu18FSok80-u-iuhSSKKoe8XwwJG0Fw)
+<h6>Fig7. Agent’s behavior before training</h6>
 
-![picture6](https://docs.google.com/uc?id=1FQ0Ruob6qZvQAIvfprSHGRjEfYxHaoVG)
-<h6>Fig6. Agent’s behavior after training</h6>
+![picture8](https://docs.google.com/uc?id=1FQ0Ruob6qZvQAIvfprSHGRjEfYxHaoVG)
+<h6>Fig8. Agent’s behavior after training</h6>
 
 Table. 5 x 5 [one zombie/one villager] map 
-![picture6](https://docs.google.com/uc?id=1bohSrC52tHW7KkPiLDtU047vKwfeT83C)
+![picture9](https://docs.google.com/uc?id=1bohSrC52tHW7KkPiLDtU047vKwfeT83C)
 
 
 ## Remaining goals and challenges: 
