@@ -3,6 +3,8 @@ layout:  default
 title:    Status
 ---
 
+[![Sirius-3 Youtube Summary](https://img.youtube.com/vi/r0cGpFkzpt0/0.jpg)](https://youtu.be/r0cGpFkzpt0)
+
 ## Project summary:
 
 In this project, our goal is to let agent protect villagers and kill zombies. We do this by using deep reinforcement learning,
