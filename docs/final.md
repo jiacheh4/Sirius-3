@@ -12,7 +12,9 @@ title:   Final  Report
 ## Project summary:
 
 In this project, our goal is to let agent protect villager and kill zombie. 
+
 We do this by using deep reinforcement learning, which is a combination of deep learning and reinforcement learning. 
+
 The reason we choose this algorithm is - The villager and zombie are controlled by the game AI itself. Both the agent and the villager is the potential attacking target of the zombie. So how villager and zombie behave is unpredictable. Plus the possible postions of all these three units on the map could over ten thousands, the actual possible state could way more than this number. The traditional q-learning algorithm can't handle this amount of possbile state efficiently. But we know that neural network is good at processing such scale of numbers. Thus we replace the q-function with neural newtwork, and this becomes our final algorithm - deep reinforcement learning.
 
 
@@ -27,14 +29,17 @@ Following is the whole process diagram of our algorithm:
 #### _Algorithm:_
 
 To be specific, we use DQN(Deep Q-Network) as our baseline algorithm. 
+
 The key point of this algorithm is to fit the original q-value function by using a neural network, which is:
 
 > Q(s,a,w)~q(s,a)
 
 where Q is the neural network, w is the weight.
-We actually design two ways of representing the relationship between state,action and q-values, which will make easier for us to calculate. They are:
-   1.Q(state)=actions,q-values
-   2.Q(state,action)=q-value
+
+We actually design two ways of representing the relationship between state,action and q-values, which will make easier for us to calculate. <br>
+They are:<br>
+   1.Q(state)=actions,q-values<br>
+   2.Q(state,action)=q-value<br>
 The first one is the actions and corresponding q-values under given state, and the second one is the q-value under given state and action. 
 
 In the original Q-Network algorithm, we use Bellman equation to iteratively updating the q-function:
@@ -45,17 +50,19 @@ But apparently, if we already know what q(s,a) is, there is no need for us to us
 
 > Loss = (reward+γ\*max Q(s',a',w')-Q(s,a,w))<sup>2</sup>
 
-This means, we use past neural network to fit the future neural network.
+This means, we use past neural network to fit the future neural network.<br>
 Also, if we update w every frame, the value would become very unstable. Because while Q is having a new w, Q’ is also having a new value, which the model would not be able to aim for a correct target. So we update the w every 10000 frame. This is called delayed update policy.We keep the same neural network, but we have two weights.
 
 
 Our improved algorithm is Double DQN.
-Compared with DQN, Double DQN keeps the advantages of DQN and have some improvements. Technically, it's better than DQN so we don't talk about the disadvantage of Double DQN compared to DQN.
-Double DQN comes from the idea of Double Q-learning. In Double Q-learning, we construct two q-functions and update them alternately, which means if we use Q1 to choose action, we update Q2, and vice-versa. We can do the same in DQN. But we find that, since we are using delayed update policy, we aleady have two weights, we can consider them as two seperate neural network. We don't need to construct a new one. So the Loss function of Double DQN is the following:
+
+Compared with DQN, Double DQN keeps the advantages of DQN and have some improvements. Technically, it's better than DQN so we don't talk about the disadvantage of Double DQN compared to DQN.<br>
+Double DQN comes from the idea of Double Q-learning. In Double Q-learning, we construct two q-functions and update them alternately, which means if we use Q1 to choose action, we update Q2, and vice-versa. We can do the same in DQN. But we find that, since we are using delayed update policy, we aleady have two weights, we can consider them as two seperate neural network. We don't need to construct a new one. <br>
+So the Loss function of Double DQN is the following:
 
 > Loss = (reward+γ\*Q(s',argmax Q(s',a',w),w')-Q(s,a,w))<sup>2</sup>
 
-We use past weight to choose action, and use this action and new state to fit future weight. 
+We use past weight to choose action, and use this action and new state to fit future weight. <br>
 The best improvement of Double DQN is, it elimates the overestimate. In fact, the q-value in DQN would become larger and larger eventually. By doing this in Double-DQN, the overestimate can be controlled so that the q-value won't become too large. 
 
 #### _Input:_
@@ -63,6 +70,7 @@ The best improvement of Double DQN is, it elimates the overestimate. In fact, th
 Initially, the baseline for our input state would be a 5x5 map from every frame, including the position of the agent, zombie and villager. And some direction information of the agent. Different position of either agent, villager and zombie would be a unique position state. The total position states in 5x5 map would be 25x24x23 = 13800. While the agent have degree as direction information, the actual state would be hard to calculate. And that’s why we choose neural network to process. 
 
 While in our final version, we make the map become 7x7.
+
 To have more details, we actually take 4 frames as a complete state. Aka, a complete state would be a 4x7x7 array. Because the difference between every frame is too small, especially the position information, any of the unit on the map may be in the same brick for 3~5 frames. So we put 4 frames together to make a status.
 
 ![picture1](https://docs.google.com/uc?id=1HKmLBiS-_4rl8djMIUy71cU6uyUr07Y4)
@@ -96,6 +104,7 @@ We also consider the storage. Our memory array have a limitation. If it’s full
 #### _Reward:_
 
 We initially set 6 different situations for rewarding in total. If villager alive in every frame, we give reward 0.02. If villager died, the agent will have reward -50. If zombie died, it scores 40. If the zombie is attacked by the agent, everytime it scores 10. If agent is attacked by zombie, it scores -5. Finally if our agent died, it scores -40. 
+
 But in the final version, we delete the reward for the alive of villager, which gets 0.02 every frame. We find that if we do this, the agent may just walk around and buy more time, which would greatly increase the total reward but not killing zombie.
 
 
