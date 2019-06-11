@@ -22,7 +22,7 @@ The reason we choose this algorithm is - The villager and zombie are controlled 
 
 Following is the whole process diagram of our algorithm:
 
-![picture1](https://docs.google.com/uc?id=1bn3oM9O2TEnE1iywUMD3XLSZOir2bjCk)
+![picture1](https://docs.google.com/uc?id=1brOTnZPjaMM5QjZ2awT4x_j3P4Kk0DGx)
 <h6>Fig1. Diagram of the algorithm</h6>
 
 
@@ -38,8 +38,8 @@ where Q is the neural network, w is the weight.
 
 We actually design two ways of representing the relationship between state,action and q-values, which will make easier for us to calculate. <br>
 They are:<br>
-   1.Q(state)=actions,q-values<br>
-   2.Q(state,action)=q-value<br>
+   1. Q(state) = actions,q - values<br>
+   2. Q(state, action) = q - value<br>
 The first one is the actions and corresponding q-values under given state, and the second one is the q-value under given state and action. 
 
 In the original Q-Network algorithm, we use Bellman equation to iteratively updating the q-function:
@@ -71,10 +71,12 @@ Initially, the baseline for our input state would be a 5x5 map from every frame,
 
 While in our final version, we make the map become 7x7.
 
-To have more details, we actually take 4 frames as a complete state. Aka, a complete state would be a 4x7x7 array. Because the difference between every frame is too small, especially the position information, any of the unit on the map may be in the same brick for 3~5 frames. So we put 4 frames together to make a status.
-
 ![picture1](https://docs.google.com/uc?id=1HKmLBiS-_4rl8djMIUy71cU6uyUr07Y4)
 <h6>Fig2. Structure of a single complete State</h6>
+
+To have more details, we actually take 4 frames as a complete state. Aka, a complete state would be a 7x7x4 array. Because the difference between every frame is too small, especially the position information, any of the unit on the map may be in the same brick for 3~5 frames. So we put 4 frames together to make a status.
+
+
 
 
 #### _Dealing with Data:_
@@ -111,10 +113,13 @@ But in the final version, we delete the reward for the alive of villager, which 
 #### _Action and Policy:_
 
 We only have 5 action, which are move forward, move backward, turn left, turn right and doing nothing. We let the agent keep attacking so that it only need to consider about which way to go.
+
 In the baseline, the way we choose action is the Greedy Epsilon Policy. We would set the value of epsilon to be 0.05. Then we will randomly generate a number between 0-1, if the number is greater and equal than 0.05, our agent will pick the most valuable action from the q-value list. Otherwise, agent will randomly pick an action to execute. 
+
 In the final version, we improve the policy to be Linear Greedy Epsilon Policy. The reason we do this is - in fact, all the weights in the neural network are set randomly, so the "best action" it choose makes no sense at all, there is no way that we can trust our model at the begining, so there is no need for us to ask it. Just pick a random action. So at the begining, epsilon is set to 1. With the time past, epsilon would going down little by little until 0.05. By doing this, we start to give more trust to our model with the time pass by, but we still want the agent has the chance to get new/random action.
 
-
+![picture3](https://docs.google.com/uc?id=1gdNqi6Y038Ix8Ar9MsTzEUhuKKomKeK3)
+<h6>Fig4. Linear Greedy Epsilon Policy</h6>
 
 ## Evaluation:
 
