@@ -3,6 +3,12 @@ layout:  default
 title:    Status
 ---
 
+
+## Video Summary:
+
+[Youtube Link]()
+
+
 ## Project summary:
 
 In this project, our goal is to let agent protect villagers and kill zombies. We do this by using deep reinforcement learning,
@@ -96,13 +102,14 @@ The accuracy is the number of “correct” actions that generates positive rewa
 There are some examples regarding our accuracy measurement.
 
 ![picture4](https://docs.google.com/uc?id=1UC2DO-RqI3zcbA5DZ4EVY6W7o1gF1PD0)
-<h6>Fig4. The agent was attacked the villager</h6>
+<h6>Fig4. The agent is attacking the villager</h6>
 
 In the picture above, the agent performed an action we don’t want. We count this as a false positive because the agent is able to learn that attacking villager will result in a negative reward. There are also cases when villagers and zombies stayed very close. By which I mean agent may accidentally attack the villager while his first intention was the zombie. 
 
-![picture5](https://docs.google.com/uc?id=1UC2DO-RqI3zcbA5DZ4EVY6W7o1gF1PD0)
+
+![picture5](https://docs.google.com/uc?id=1NViFpFv-skRze1dKprkkuIkNF8bnQXz2)
 <h6>Fig5. The villager was attacked by zombie</h6>
-![picture6](https://docs.google.com/uc?id=1NViFpFv-skRze1dKprkkuIkNF8bnQXz2)
+![picture6](https://docs.google.com/uc?id=1YgtjkIKhi8fiL5WjJzJoFyBOxvBcg8Gq)
 <h6>Fig6. Agent draws the attention of zombie</h6>
 
 ![picture7](https://docs.google.com/uc?id=1yGu18FSok80-u-iuhSSKKoe8XwwJG0Fw)
@@ -132,9 +139,7 @@ Table. 5 x 5 [one zombie/one villager] map
 
 
 
-## Video Summary:
 
-[Youtube Link]()
 
 
 
