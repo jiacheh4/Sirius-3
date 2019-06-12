@@ -114,22 +114,22 @@ But in the final version, we delete the reward for the alive of villager, which 
 
 #### _Action and Policy:_
 
-_Action:_
+_Action:_<br>
 We only have 5 action, which are move forward, move backward, turn left, turn right and doing nothing. We let the agent keep attacking so that it only need to consider about which way to go.
 
-_Policy:_
+_Policy:_<br>
 We set three policies in our function and use parameter to choose which one we want to use.
 
-_1. Greedy Epsilon Policy:_
+_1. Greedy Epsilon Policy:_<br>
 In the baseline, the way we choose action is the Greedy Epsilon Policy. We would set the value of epsilon to be 0.05. Then we will randomly generate a number between 0-1, if the number is greater and equal than 0.05, our agent will pick the most valuable action from the q-value list. Otherwise, agent will randomly pick an action to execute. 
 
-_2. Linear Greedy Epsilon Policy:_
+_2. Linear Greedy Epsilon Policy:_<br>
 In the final version, we improve the policy to be Linear Greedy Epsilon Policy. The reason we do this is - in fact, all the weights in the neural network are set randomly, so the "best action" it choose makes no sense at all, there is no way that we can trust our model at the begining, so there is no need for us to ask it. Just pick a random action. So at the begining, epsilon is set to 1. With the time past, epsilon would going down little by little until 0.05. By doing this, we start to give more trust to our model with the time pass by, but we still want the agent has the chance to get new/random action.
 
 ![picture3](https://docs.google.com/uc?id=1gdNqi6Y038Ix8Ar9MsTzEUhuKKomKeK3)
 <h6>Fig4. Linear Greedy Epsilon Policy</h6>
 
-_3. Greedy Policy_
+_3. Greedy Policy_<br>
 This policy is totally for testing, we do not set any epsilon. After the model has been trained, we totally let the model decides the best action because we give 100 percent trust for our model.
 
 ## Evaluation:
