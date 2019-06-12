@@ -28,7 +28,7 @@ Following is the whole process diagram of our algorithm:
 
 #### _Algorithm:_
 
-To be specific, we use DQN(Deep Q-Network) as our baseline algorithm. 
+_To be specific, we use DQN(Deep Q-Network) as our baseline algorithm. _
 
 The key point of this algorithm is to fit the original q-value function by using a neural network, which is:
 
@@ -54,7 +54,7 @@ This means, we use past neural network to fit the future neural network.<br>
 Also, if we update w every frame, the value would become very unstable. Because while Q is having a new w, Q’ is also having a new value, which the model would not be able to aim for a correct target. So we update the w every 10000 frame. This is called delayed update policy.We keep the same neural network, but we have two weights.
 
 
-Our improved algorithm is Double DQN.
+_Our improved algorithm is Double DQN._
 
 Compared with DQN, Double DQN keeps the advantages of DQN and have some improvements. Technically, it's better than DQN so we don't talk about the disadvantage of Double DQN compared to DQN.<br>
 Double DQN comes from the idea of Double Q-learning. In Double Q-learning, we construct two q-functions and update them alternately, which means if we use Q1 to choose action, we update Q2, and vice-versa. We can do the same in DQN. But we find that, since we are using delayed update policy, we aleady have two weights, we can consider them as two seperate neural network. We don't need to construct a new one. <br>
@@ -67,7 +67,9 @@ The best improvement of Double DQN is, it elimates the overestimate. In fact, th
 
 #### _Input:_
 
-Initially, the baseline for our input state would be a 5x5 map from every frame, including the position of the agent, zombie and villager. And some direction information of the agent. Different position of either agent, villager and zombie would be a unique position state. The total position states in 5x5 map would be 25x24x23 = 13800. While the agent have degree as direction information, the actual state would be hard to calculate. And that’s why we choose neural network to process. 
+Initially, the baseline for our input state would be a 5x5 map from every frame, including the position of the agent, zombie and villager. We use game API to get the yaw infomation of the agent, and we use this to calculate what angle the agent is facing at each frame, since agent need to know where is the enemy and which direction he should go. But we don't care the angle of the villager and the zombie.
+
+Different positions of either agent, villager and zombie would be a unique position state. The total position states in 5x5 map would be 25x24x23 = 13800. While the agent have degree as direction information, the actual state would be hard to calculate. And that’s why we choose neural network to process. 
 
 While in our final version, we make the map become 7x7.
 
@@ -112,14 +114,23 @@ But in the final version, we delete the reward for the alive of villager, which 
 
 #### _Action and Policy:_
 
+_Action: _
 We only have 5 action, which are move forward, move backward, turn left, turn right and doing nothing. We let the agent keep attacking so that it only need to consider about which way to go.
 
+_Policy:_
+We set three policies in our function and use parameter to choose which one we want to use.
+
+_1. Greedy Epsilon Policy:_
 In the baseline, the way we choose action is the Greedy Epsilon Policy. We would set the value of epsilon to be 0.05. Then we will randomly generate a number between 0-1, if the number is greater and equal than 0.05, our agent will pick the most valuable action from the q-value list. Otherwise, agent will randomly pick an action to execute. 
 
+_2. Linear Greedy Epsilon Policy: _
 In the final version, we improve the policy to be Linear Greedy Epsilon Policy. The reason we do this is - in fact, all the weights in the neural network are set randomly, so the "best action" it choose makes no sense at all, there is no way that we can trust our model at the begining, so there is no need for us to ask it. Just pick a random action. So at the begining, epsilon is set to 1. With the time past, epsilon would going down little by little until 0.05. By doing this, we start to give more trust to our model with the time pass by, but we still want the agent has the chance to get new/random action.
 
 ![picture3](https://docs.google.com/uc?id=1gdNqi6Y038Ix8Ar9MsTzEUhuKKomKeK3)
 <h6>Fig4. Linear Greedy Epsilon Policy</h6>
+
+_3. Greedy Policy_
+This policy is totally for testing, we do not set any epsilon. After the model has been trained, we totally let the model decides the best action because we give 100 percent trust for our model.
 
 ## Evaluation:
 
