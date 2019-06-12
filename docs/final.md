@@ -46,7 +46,7 @@ In the original Q-Network algorithm, we use Bellman equation to iteratively upda
 
 > q<sub>new</sub>(s,a)= E<sub>s’</sub>[reward+γ\*max q(s',a')| S<sub>t</sub>=s, A<sub>t</sub>=a]
                   
-But apparently, if we already know what q(s,a) is, there is no need for us to use neural network to fit it. Plus, as a traditional machine learning algorithm, the neural network need a loss function to update the weight. Then how do we accomplish these two missions?  We use following:
+But apparently, if we already know what q(s,a) is, there is no need for us to use neural network to fit it. Plus, as a traditional machine learning algorithm, the neural network need a loss function to update the weight. _Then how do we accomplish these two missions?_  We use following:
 
 > Loss = (reward+γ\*max Q(s',a',w')-Q(s,a,w))<sup>2</sup>
 
@@ -83,7 +83,7 @@ To have more details, we actually take 4 frames as a complete state. Aka, a comp
 
 #### _Dealing with Data:_
 
-In the traditional machine learning process, we shuffle the data to solve the problem of correlation. Aka, if you are doing a classification problem, it’s better to train some Class A and some Class B, instead of training the algorithm with all Class A and then all Class B.  Then we face another problem when we processing the data in DQN: There is no way for us to get future state(data) before we start training the neural network. How do we do that? 
+In the traditional machine learning process, we shuffle the data to solve the problem of correlation. Aka, if you are doing a classification problem, it’s better to train some Class A and some Class B, instead of training the algorithm with all Class A and then all Class B.  Then we face another problem when we processing the data in DQN: There is no way for us to get future state(data) before we start training the neural network. _How do we do that?_ 
 We use a experience/memory array to record all the states. We use this array to store the past state, and randomly take out some samples and feed them to the neural network to do the training.  
 The real memory array would be in the form of:
 
