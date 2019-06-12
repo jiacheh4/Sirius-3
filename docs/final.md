@@ -9,7 +9,7 @@ title:   Final  Report
 [Youtube Link]()
 
 
-## Project summary:
+## Project Summary:
 
 In this project, our goal is to let agent protect villager and kill zombie. 
 
