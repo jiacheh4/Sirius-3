@@ -16,7 +16,7 @@ import errno
 import random
 import MalmoPython
 import malmoutils # For video recording
-
+import prettytable 
 
 
 #=========Core part import====================
@@ -27,10 +27,13 @@ from helper import mean_huber_loss, get_frame
 from keras.optimizers import Adam
 #=============================================
 
+# Agent, Villager, Zombie
+MAP_SIZE = 10
+# initial_frame = [[3, 1], [4, 3], [2, 3]]
+initial_frame = [[1, 1], [6, 4], [2, 4]]
 
-
-### 5 X 5  
-mapblock = '''
+### 5 X 5
+mapblock1 = '''
     <DrawingDecorator>
         <DrawCuboid x1="-5" y1="200" z1="-5" x2="5" y2="200" z2="5" type="lava"/>
         <DrawCuboid x1="-5" y1="226" z1="-5" x2="5" y2="230" z2="5" type="glowstone"/>
@@ -41,9 +44,33 @@ mapblock = '''
     </DrawingDecorator>
 '''
 
+### 10 X 10  
+mapblock3 = '''
+    <DrawingDecorator>
+        <DrawCuboid x1="12" y1="200" z1="12" x2="-3" y2="200" z2="-3" type="lava"/>
+        <DrawCuboid x1="12" y1="226" z1="12" x2="-2" y2="230" z2="-2" type="glowstone"/>
+        <DrawCuboid x1="12" y1="201" z1="12" x2="-2" y2="225" z2="-2" type="stained_glass" colour="RED"/>
+        <DrawCuboid x1="9" y1="202" z1="9" x2="0" y2="220" z2="0" type="air"/>
+        <DrawEntity x="6" y="202" z="4" type="Zombie"/>
+        <DrawEntity x="2" y="202" z="4" type="Villager"/>
+    </DrawingDecorator>
+'''
+
+### 7 X 7
+mapblock2 = '''
+    <DrawingDecorator>
+        <DrawCuboid x1="-6" y1="200" z1="-6" x2="6" y2="200" z2="6" type="lava"/>
+        <DrawCuboid x1="-6" y1="226" z1="-6" x2="6" y2="230" z2="6" type="glowstone"/>
+        <DrawCuboid x1="-5" y1="201" z1="-5" x2="5" y2="225" z2="5" type="stained_glass" colour="RED"/>
+        <DrawCuboid x1="-3" y1="202" z1="-3" x2="3" y2="220" z2="3" type="air"/>
+        <DrawEntity x="-1" y="202" z="2" type="Zombie"/>
+        <DrawEntity x="1" y="202" z="2" type="Villager"/>
+    </DrawingDecorator>
+'''
+
 # ----------------------------------- Functions ----------------------------------------
 
-def GetMissionXML( mapblock, agent_host ):
+def GetMissionXML( mapblock, mapsize, agent_x, agent_z, agent_host ):
     '''Generate Mission XML'''
     return '''<?xml version="1.0" encoding="UTF-8" ?>
     <Mission xmlns="http://ProjectMalmo.microsoft.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
@@ -66,15 +93,16 @@ def GetMissionXML( mapblock, agent_host ):
         <AgentSection mode="Survival">
             <Name>Agent Sirius</Name>
             <AgentStart>
-                <Placement x="0" y="202" z="0"/>
+                <Placement x="'''+ str(agent_x) +'''" y="202" z="'''+ str(agent_z) +'''"/>
                 <Inventory>
                     <InventoryObject type="diamond_sword" slot="0" quantity="1"/>
                 </Inventory>
             </AgentStart>
             <AgentHandlers>
                 <ObservationFromNearbyEntities>
-                    <Range name="Mobs" xrange="5" yrange="1" zrange="5" update_frequency="1"/>
+                    <Range name="Mobs" xrange="'''+ str(mapsize*2) +'''" yrange="1" zrange="''' + str(mapsize*2) +'''" update_frequency="1"/>
                 </ObservationFromNearbyEntities>
+                <ObservationFromRay/>
                 <DiscreteMovementCommands>
                     <ModifierList type="deny-list">
                         <command>attack</command>
@@ -89,17 +117,20 @@ def GetMissionXML( mapblock, agent_host ):
                         <command>turn</command>
                     </ModifierList>
                 </ContinuousMovementCommands>
+                <ChatCommands/>
+                <MissionQuitCommands quitDescription="You Did It Agent Sirius"/>
                 </AgentHandlers>
         </AgentSection>
 
     </Mission>'''
     
-def generate_random_start_position():
+def generate_random_start_position(MAP_SIZE):
     result = []
+    # Randomly generate starting positions for agent, villager, and zombie
     for _ in range(3):
         temp_list = []
-        temp_list.append(random.uniform(-1.7, 2.7))
-        temp_list.append(random.uniform(-1.7, 2.7))
+        temp_list.append(random.uniform(0.3, MAP_SIZE - 0.3))
+        temp_list.append(random.uniform(0.3, MAP_SIZE - 0.3))
         result.append(temp_list)
     return result
 
@@ -121,24 +152,20 @@ def act(action):
         if action == 0: 
             # moving forward
             agent_host.sendCommand( "attack 1")
-            agent_host.sendCommand( "move 0.8")
+            agent_host.sendCommand( "move 0.6")
                    
         if action == 1:
             # moving backward
             agent_host.sendCommand( "attack 1")
-            agent_host.sendCommand( "move -0.4")
+            agent_host.sendCommand( "move -0.3")
         if action == 2:
             # turn left
             agent_host.sendCommand( "attack 1")
-            agent_host.sendCommand("turn -0.8")
-            #time.sleep(0.25)
-            #agent_host.sendCommand("turn 0")
+            agent_host.sendCommand("turn -0.5")
         if action == 3:
             # turn right
             agent_host.sendCommand( "attack 1")
-            agent_host.sendCommand("turn 0.8")
-            #time.sleep(0.25)
-            #agent_host.sendCommand("turn 0")
+            agent_host.sendCommand("turn 0.5")
         if action == 4:
             # stay still
             agent_host.sendCommand( "attack 1") 
@@ -146,7 +173,7 @@ def act(action):
         print("Failed to send command:", e)
         sys.exit()
 
-def get_info(ob):   
+def get_info(ob, NUM_OF_AGENT, NUM_OF_VILLAGERS, NUM_OF_ZOMBIES):   
     # Collecting information from world state observation
     information_list = []
     reward = 0 
@@ -155,12 +182,15 @@ def get_info(ob):
             information_list.append(item['name'])          # Name of the entity
     information_list = sorted(information_list) # get infomation in order of agent, villager, and zombie
     # print(information_list)
-    if "Villager" not in information_list:
+    if "Villager" not in information_list and NUM_OF_VILLAGERS[0] > 0:
         reward -= 50
-    elif "Zombie" not in information_list:
+        NUM_OF_VILLAGERS[0] = 0 
+    elif "Zombie" not in information_list and NUM_OF_ZOMBIES[0] > 0:
         reward += 40
-    elif "Agent Sirius" not in information_list:
+        NUM_OF_ZOMBIES[0] = 0
+    elif "Agent Sirius" not in information_list and NUM_OF_AGENT[0] > 0:
         reward -= 40
+        NUM_OF_AGENT[0] = 0 
     return len(information_list)<3, reward
 
 def get_arr(ob):   
@@ -176,7 +206,7 @@ def get_arr(ob):
             information_list.append(temp_list)
             info_set.add(item['name'])
     information_list = sorted(information_list) # get infomation in order of agent, villager, and zombie
-    #print(information_list)
+    # print(information_list)
     if len(information_list) >= 4:
         for i in information_list:
             if i == []:
@@ -207,21 +237,25 @@ def get_arr(ob):
         return [[-99, -99], [-99, -99], [-99, -99]]
 
 
-def get_angle(ob,yaw):
-    if ob['Mobs'][0]['name']=='Agent Sirius':
-        cur_angle=ob['Mobs'][0]['yaw']-yaw[0]
-        yaw[0]=ob['Mobs'][0]['yaw']
-        return cur_angle
-    else:
-        return 0
+def get_angle(ob,yaw_angle):
+    if ob['Mobs'][0]['name']=='Agent Sirius' and ob['Mobs'][0]['yaw']!=yaw_angle[0]:
+        diff=ob['Mobs'][0]['yaw']-yaw_angle[0]
+        yaw_angle[0]=ob['Mobs'][0]['yaw']
+        yaw_angle[1]+=diff
+        if yaw_angle[1]>=360:
+            yaw_angle[1]-=360
+        elif yaw_angle[1]<0:
+            yaw_angle[1]+=360
+
+    return yaw_angle[1]
 
   
-def set_reward(ob, agent_life, villager_life, zombie_life):
+def set_reward(ob, agent_life, villager_life, zombie_life, hit_zombie, hit_by_zombie, hit_villager):
     # Collecting information from world state observation
     information_list = []
     reward = 0
-    if villager_life[0] != 0:
-        reward += 0.02
+    #if villager_life[0] != 0:
+        #reward += 0.02
     for item in ob['Mobs']:
         temp_list = []
         if item['name'] in {'Agent Sirius', 'Villager', 'Zombie'}:
@@ -232,43 +266,67 @@ def set_reward(ob, agent_life, villager_life, zombie_life):
     # print(information_list)
     if len(information_list) != 3:
         return reward
+    try:
+        t = ob["LineOfSight"]["type"]
+        d = ob["LineOfSight"]["distance"]
+        if t == "stained_glass" and int(d) < 0.5:
+            reward -= 0.01
+    except:
+        pass
     if information_list[0][1] < agent_life[0]:
+        #print(information_list[0][1] ,agent_life[0])
         reward -= 5
         agent_life[0] = information_list[0][1]
+        hit_by_zombie[0] += 1
     if information_list[1][1] < villager_life[0]:
         reward -= 15
         villager_life[0] = information_list[1][1]
+        hit_villager[0] += 1
     if information_list[2][1] < zombie_life[0]:
         reward += 10
         zombie_life[0] = information_list[2][1]
+        hit_zombie[0] += 1
 
     return reward
 
     
 # ------------------------------ Variable Declaration ----------------------------------
-NUM_OF_ZOMBIES = 1
-NUM_OF_VILLAGERS = 1
 agent_host = MalmoPython.AgentHost()
 malmoutils.parse_command_line(agent_host)
 validate = True
 
-num_reps = 300
+num_reps = 500
 
 #=======core part initialization====================================
-#input size 5*5
-memory=MemoryD(5)
-network_model, q_values_func = cnn_model()
-agent=Agent(network_model, q_values_func,memory)
+
+memory=MemoryD(MAP_SIZE)
+network_model, q_values_func = nn_model(input_shape= [MAP_SIZE, MAP_SIZE])
+#network_model, q_values_func = cnn_model()
+agent=Agent(network_model, q_values_func,memory, 'train', 'ddqn')
 #set learning rate to be 0.00025
-agent.do_compile(optimizer=Adam(lr=0.0025), loss_func=mean_huber_loss)
+agent.do_compile(optimizer=Adam(lr=0.00025), loss_func=mean_huber_loss)
 agent.memoryD.clear()
+
+#===================================================================
+
+#=====================Creating table================================
+table = prettytable.PrettyTable(["Mission", "Total Reward", "Weight Update", "Number of Steps", "Hit Zombie", "Hit by Zombie", "Hit Villager", "Zombies Killed", "Villagers Killed"])
 #===================================================================
 
 
-
 for iRepeat in range(num_reps):
-    my_mission_record = malmoutils.get_default_recording_object(agent_host, "Mission_{}".format(iRepeat + 1))
-    my_mission = MalmoPython.MissionSpec(GetMissionXML(mapblock, agent_host), validate)
+    my_mission_record = malmoutils.get_default_recording_object(agent_host, "./Mission_{}".format(iRepeat + 1))
+    #my_mission_record = MalmoPython.MissionRecordSpec('./' + "Mission_" + str(iRepeat) + ".tgz")
+    #my_mission_record.recordRewards()
+    #my_mission_record.recordMP4(24,400000)
+    #my_mission_record.recordObservations()
+    
+    # =================== Randomize the initial position of agent, zombies, and villagers ===========================
+    # initial_frame = generate_random_start_position(MAP_SIZE)
+    # while check_overlap_position(initial_frame) == True:
+        # initial_frame = generate_random_start_position(MAP_SIZE)
+
+    my_mission = MalmoPython.MissionSpec(GetMissionXML(mapblock2, MAP_SIZE, initial_frame[0][0], initial_frame[0][1], agent_host), validate)
 
     max_retries = 3
     for retry in range(max_retries):
@@ -296,24 +354,49 @@ for iRepeat in range(num_reps):
     print()
 
 # ----------------------------------- Main Body ----------------------------------------
+    NUM_OF_AGENT = [1] 
+    NUM_OF_ZOMBIES = [1]
+    NUM_OF_VILLAGERS = [1]
     agent_life = [20]
     villager_life = [20]
     zombie_life = [20]
-    yaw=[0]
-    
-    initial_frame = generate_random_start_position()
-    while check_overlap_position(initial_frame) == True:
-        initial_frame = generate_random_start_position()
+    yaw_angle=[0,0]
+    hit_zombie = [0]
+    hit_by_zombie = [0]
+    hit_villager = [0]
+
     #=========core initialzation====================
     t=0
     total_reward=0
-
-    frame = get_frame(initial_frame[0],initial_frame[1],initial_frame[2],0)
+    frame = get_frame(initial_frame[0], initial_frame[1], initial_frame[2], 0, MAP_SIZE)
     #===============================================
+    
+    waiting=0
     while True:
-        world_state = agent_host.getWorldState()
-        if world_state.number_of_observations_since_last_state >0:
+        world_state = agent_host.peekWorldState()
+        if world_state.number_of_observations_since_last_state >0 or waiting>1000:
             break
+    if waiting>1000:
+        continue
+
+    #================================================
+    '''
+    tmp=0
+    cur_angle=0
+    while world_state.is_mission_running:
+        world_state = agent_host.peekWorldState()
+        #print(world_state.video_frames[-1])
+        if world_state.number_of_observations_since_last_state > 0:
+            msg = world_state.observations[-1].text
+            ob = json.loads(msg)
+            cur_angle+=(ob['Mobs'][0]['yaw']-tmp)
+            if cur_angle>=360:
+                cur_angle-=360
+            tmp=ob['Mobs'][0]['yaw']
+            #if cur_angle!=0:
+            print(cur_angle)
+    
+    '''
     while True:
         
         
@@ -329,45 +412,55 @@ for iRepeat in range(num_reps):
         if world_state.number_of_observations_since_last_state > 0:
             msg = world_state.observations[-1].text
             ob = json.loads(msg)
-            #print(ob['Mobs'][0]['yaw'])
             ob_copy=ob.copy()
         else:
             ob=ob_copy
-        angle=get_angle(ob,yaw)
+        angle=get_angle(ob,yaw_angle)
         # get array of entity coords            
         new_arr = get_arr(ob)
         if new_arr != None:
-            new_frame = get_frame(new_arr[0],new_arr[1],new_arr[2],angle)
+            new_frame = get_frame(new_arr[0],new_arr[1],new_arr[2],angle, MAP_SIZE)
         else:
-            new_frame = get_frame([-99, -99], [-99, -99], [-99, -99],angle)
+            continue
+            #new_frame = get_frame([-99, -99], [-99, -99], [-99, -99],angle)
         # check terminal state
         reward = 0
-        is_t, t_reward = get_info(ob)
+        is_t, t_reward = get_info(ob, NUM_OF_AGENT, NUM_OF_VILLAGERS, NUM_OF_ZOMBIES)
         reward += t_reward
-        if not world_state.is_mission_running or is_t:
+        if NUM_OF_ZOMBIES[0] == 0:
+            agent_host.sendCommand("chat Mission Completed! All Zombies Are Killed")
+            agent_host.sendCommand("quit")
+        if not world_state.is_mission_running:
             is_terminal = True
         else:
             is_terminal = False
 
         # check reward
-        reward += set_reward(ob, agent_life, villager_life, zombie_life)
+        reward += set_reward(ob, agent_life, villager_life, zombie_life, hit_zombie, hit_by_zombie, hit_villager)
         total_reward += reward
         print(action," Total score:", total_reward, "     Score:", reward)
         agent.memoryD.append(frame,action,reward,is_terminal)
-        if agent.num_step>5000:
-            if agent.num_step%10==0:
+        if agent.num_step>20000:
+            if agent.num_step%19000==0:
                 agent.update()
             
-        if is_terminal or t> 10000:
+        if is_terminal:
             break
             
         frame=new_frame
         #===============================================================
-            
-            #print("Got " + str(world_state.number_of_observations_since_last_state) + " observations since last state.")
-            
+    
         world_state = agent_host.getWorldState()
 
+    killed_zombies = 0
+    killed_villagers = 0
+    if NUM_OF_ZOMBIES[0] == 0:
+        killed_zombies = 1
+    if NUM_OF_VILLAGERS[0] == 0:
+        killed_villagers = 1
+
+    table.add_row([str(iRepeat+1), total_reward, agent.update_times, agent.num_step, hit_zombie[0], hit_by_zombie[0], hit_villager[0], killed_zombies, killed_villagers])
+    with open('output.txt', 'w') as file:
+        file.write(table.get_string())
     print("=============== Mission", str(iRepeat + 1), "has stopped ==================")
     print("Agent step",agent.num_step,"Update times",agent.update_times)
-    # time.sleep(0.5) 
