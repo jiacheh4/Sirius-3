@@ -164,7 +164,7 @@ Table. 5 x 5 [one zombie/one villager] map
 ![picture9](https://docs.google.com/uc?id=1bohSrC52tHW7KkPiLDtU047vKwfeT83C)
 
 Table. 7 x 7 map
-![picture10](/docs/imgae/table1.png)
+<img src="image/table2.png" alt="image/table2.png">
 
 
 
