@@ -164,9 +164,9 @@ Table. 5 x 5 [one zombie/one villager] map
 ![picture9](https://docs.google.com/uc?id=1bohSrC52tHW7KkPiLDtU047vKwfeT83C)
 <br>
 In the second phase, we change the prototype of the matrix from containing both positive and negative coordinates to containing all positive coordinates. So that we can easily expand our map size to 7 x 7, 10 x 10 or even larger in the future without changing the core implementation of the helper functions and DQN algorithms. 
-<br>
+<br><br>
 <img src="image/grid.png" alt="image/grid.png">
-<br>
+<br><br>
 As we setting up a larger map (7 x 7 this time) in order to increase the difficulty of the game since the number of parameter doubles and the agent will need more time/rounds to learn. The data below indicates the learning progress of the agent, you can see the first column represents the total rewards received and second last column represents the number of zombies killed. In this case, a 1 would simply mean "Sucess". As the training goes on (I neglect the trivial middle training data), we can see the agent is making good progress from round 160 since the agent is able to kill the zombie more frequently than the first 20 rounds. Finally, at about 400 rounds, we can observe that the agent has made steady progress by consecutively slain the zombie.
 <br><br>
 Table. 7 x 7 [one zombie/one villager] map 
