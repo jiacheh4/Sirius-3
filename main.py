@@ -21,7 +21,7 @@ import prettytable
 
 #=========Core part import====================
 from memoryD import MemoryD
-from cnn import cnn_model,nn_model
+from cnn import nn_model
 from dqn import Agent
 from helper import mean_huber_loss, get_frame
 from keras.optimizers import Adam
@@ -316,10 +316,6 @@ table = prettytable.PrettyTable(["Mission", "Total Reward", "Weight Update", "Nu
 
 for iRepeat in range(num_reps):
     my_mission_record = malmoutils.get_default_recording_object(agent_host, "./Mission_{}".format(iRepeat + 1))
-    #my_mission_record = MalmoPython.MissionRecordSpec('./' + "Mission_" + str(iRepeat) + ".tgz")
-    #my_mission_record.recordRewards()
-    #my_mission_record.recordMP4(24,400000)
-    #my_mission_record.recordObservations()
     
     # =================== Randomize the initial position of agent, zombies, and villagers ===========================
     # initial_frame = generate_random_start_position(MAP_SIZE)
@@ -380,23 +376,6 @@ for iRepeat in range(num_reps):
         continue
 
     #================================================
-    '''
-    tmp=0
-    cur_angle=0
-    while world_state.is_mission_running:
-        world_state = agent_host.peekWorldState()
-        #print(world_state.video_frames[-1])
-        if world_state.number_of_observations_since_last_state > 0:
-            msg = world_state.observations[-1].text
-            ob = json.loads(msg)
-            cur_angle+=(ob['Mobs'][0]['yaw']-tmp)
-            if cur_angle>=360:
-                cur_angle-=360
-            tmp=ob['Mobs'][0]['yaw']
-            #if cur_angle!=0:
-            print(cur_angle)
-    
-    '''
     while True:
         
         
