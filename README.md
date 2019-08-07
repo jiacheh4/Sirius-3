@@ -35,6 +35,10 @@ NOTE: If you encounter this error "ImportError: No module named MalmoPython" try
       MalmoPython.iso 
 
 ### Running the Program ###
-To run the unittest after you executed the program. Type the line below on the terminal.
 
-    python test_functions.py
+      cd Minecraft
+      
+      launchClient (On Windows)
+      
+      ./launchClient.sh (On Linux or MacOSX)
+
