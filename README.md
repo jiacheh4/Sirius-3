@@ -30,7 +30,9 @@ For more details on how to install go to [Malmo](https://github.com/jiacheh4/mal
 
 Pip install for Malmo. Once installed, the malmo Python module can be used to download source and examples and start up Minecraft with the Malmo game mod.
 
-NOTE: If you encounter this error "ImportError: No module named MalmoPython" try put ### MalmoPython.iso ### in your project directory.
+NOTE: If you encounter this error "ImportError: No module named MalmoPython" try put the file below in your project directory.
+      
+      MalmoPython.iso 
 
 ### Running the Program ###
 To run the unittest after you executed the program. Type the line below on the terminal.
