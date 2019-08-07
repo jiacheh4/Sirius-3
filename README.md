@@ -33,12 +33,22 @@ Pip install for Malmo. Once installed, the malmo Python module can be used to do
 NOTE: If you encounter this error "ImportError: No module named MalmoPython" try put the file below in your project directory.
       
       MalmoPython.iso 
+     
+Download this project and save it in this path Malmo/Sirius-3
 
 ### Running the Program ###
+
+Once Malmo is installed on your machine, go the Malmo/Minecraft/launchClient.sh or Malmo/Minecraft/launchClient.bat to lunch the actual Minecraft game
 
       cd Minecraft
       
       launchClient (On Windows)
       
       ./launchClient.sh (On Linux or MacOSX)
+      
+Once the game finish loading, open up another terminal and type 
+      
+      cd Malmo/Sirius-3
+      
+      python3 main.py
 
