@@ -1,4 +1,4 @@
-### Sirius-3 ###
+### Minecraft AI Poject:  Sirius-3 ###
 
 ![Image](docs/image/img.jpg)
 
