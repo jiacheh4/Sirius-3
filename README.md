@@ -1,5 +1,7 @@
 ### Sirius-3 ###
 
+![Alt text](jiacheh4/Sirius-3/img.png)
+
 ### Overview ###
 The main idea of the project is to kill random spawning zombies in order to minimize the loss of villagers. By performing enforcement learning on the agent, the agent is able to learn/identify the nearest threat to a villager and eliminate the threat as quick as possible. The goal of the project is to let the agent protects as many villagers as possible by performing actions such as moving to and attacking zombies.
 
