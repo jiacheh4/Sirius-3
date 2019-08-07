@@ -10,9 +10,21 @@ Output information: Time survived so far, zombies killed so far, and score recei
 
 ### Prerequisites ###
 Note: Please install Malmo to run this program. 
-      Please install the "requests" module in order to sucessfully submit/POST the answer
-      
-    pip3 install requests
+
+      pip3 install malmo 
+
+In order to run this program there are some environment and OS dependency requirements that have to be met:
+
+1. Java 8 must be installed and the JAVA_HOME environment variable set up for Java8.
+
+2. git should be installed and on your shell search path.
+
+3. MALMO_XSD_PATH must be set to where the XSD schema files are located (more on this below).
+
+4. There are a few OS specific dependencies that must be pre-installed.
+
+For more details on how to install go to [Malmo](https://github.com/jiacheh4/malmo)
+
 
 ### Getting Started ###
 
