@@ -1,5 +1,4 @@
-### Minecraft AI Poject:  Sirius-3 ###
-https://jiacheh4.github.io/Sirius-3/index.html
+### Minecraft AI Poject:  Sirius-3 ### https://jiacheh4.github.io/Sirius-3/index.html
 ![Image](docs/image/img.jpg)
 
 ### Overview ###
