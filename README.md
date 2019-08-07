@@ -19,7 +19,7 @@ In order to run this program there are some environment and OS dependency requir
 
 2. git should be installed and on your shell search path.
 
-3. MALMO_XSD_PATH must be set to where the XSD schema files are located (more on this below).
+3. MALMO_XSD_PATH must be set to where the XSD schema files are located.
 
 4. There are a few OS specific dependencies that must be pre-installed.
 
@@ -28,6 +28,9 @@ For more details on how to install go to [Malmo](https://github.com/jiacheh4/mal
 
 ### Getting Started ###
 
+Pip install for Malmo. Once installed, the malmo Python module can be used to download source and examples and start up Minecraft with the Malmo game mod.
+
+NOTE: If you encounter this error "ImportError: No module named MalmoPython" try put ### MalmoPython.iso ### in your project directory.
 
 ### Running the Program ###
 To run the unittest after you executed the program. Type the line below on the terminal.
