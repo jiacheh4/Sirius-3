@@ -4,11 +4,6 @@ title:   Final  Report
 ---
 
 
-## Video Summary:
-
-<iframe width="800" height="500" src="https://www.youtube.com/embed/XvMaX-rjyzc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-
 ## Approach: 
 
 Following is the whole process diagram of our algorithm:
