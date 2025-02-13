@@ -7,7 +7,7 @@ title:  Home
 <br><br>
 ## Summary
 
-In this project, our goal is to let agent protect villagers and kill zombies. We do this by using deep reinforcement learning, which is a combination of deep learning and reinforcement learning. By randomly choosing actions at the beginning, agent will learn from the algorithm and start to choose the best action or move it should do to accomplish our goal. 
+In this project, our goal is to train an agent to protect villagers and eliminate zombies using deep reinforcement learning—a technique that combines deep learning with reinforcement learning. Initially, the agent explores the environment by randomly selecting actions, but over time, it learns from its experiences and begins to choose the most effective moves to achieve its objectives.
 
 ## Video Introduction
 
