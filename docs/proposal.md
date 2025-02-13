@@ -31,7 +31,3 @@ We may improve the approach by keep updating the agent’s strategy, to save mor
 
 We will visualize how many zombies and how many villagers are on the map, for example, some dots with different colors, and observe how the agent will act. For example, if the agent is using the shortest way to reach the target position, if the agent make the kill instead of walking around without doing anything or evening if the agent would protect more villagers instead of one.
 
-## Appointment with the Instructor
-
-10:00 am
-May 8th, 2019 
